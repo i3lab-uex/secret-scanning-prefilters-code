@@ -1,0 +1,15 @@
+secret-bench-data/
+creddata/
+data/
+literature/
+draft/
+__pycache__/
+*.py[cod]
+.venv/
+.ipynb_checkpoints/
+.DS_Store
+results/
+figures/
+reports/
+tmp-final-version/
+tmp-latex/
