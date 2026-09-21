@@ -13,3 +13,7 @@ figures/
 reports/
 tmp-final-version/
 tmp-latex/
+
+# Local notes on obtaining the datasets. Documents the CredData fetch
+# procedure its maintainers asked us not to publish.
+DATA.md

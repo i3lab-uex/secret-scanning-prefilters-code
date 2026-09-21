@@ -17,6 +17,10 @@ CredData must contain `meta/`, `snapshot.json`, `word_in_path.json`, and the
 pinned repository checkouts under `tmp/<repo-id>/`. The paper uses CredData
 commit `c09c0c52`. The run verifies every recovered path before evaluating it.
 
+The advisory corpus is included as `corpus/ghsa_literals.csv`: one row per
+literal, with its advisory, repository, pinned vulnerable commit, path,
+filename, length, and entropy. It carries no secret values.
+
 [creddata]: https://github.com/Samsung/CredData
 
 ## Run
@@ -25,6 +29,7 @@ commit `c09c0c52`. The run verifies every recovered path before evaluating it.
 uv sync
 uv run python -m src.run_pipeline      # SecretBench
 uv run python -m src.compare_corpora   # CredData comparison and figures
+uv run python -m src.plot_ghsa_entropy # advisory entropy figure
 ```
 
 Run the SecretBench pipeline first. CredData path and filename filters use the
