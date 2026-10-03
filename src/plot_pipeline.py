@@ -28,7 +28,7 @@ _STAGES = [
      ["every credential", "present in the code"],
      _COLORS["gray"], False),
     ("Detection and\nbuilt-in filtering",
-     ["regex patterns", "per-rule entropy gates", "path allowlists"],
+     ["regex patterns", "per-rule entropy thresholds", "path allowlists"],
      _COLORS["blue"], False),
     ("Pre-triage filters",
      ["entropy thresholds", "path and filename rules", "value-shape heuristics"],
