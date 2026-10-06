@@ -37,12 +37,17 @@ _HUMAN_CHOSEN = r"Password|URL Credentials|^Auth$"
 def recall_loss_by_category(df: pd.DataFrame) -> pd.DataFrame:
     true_secrets = df[df.true_secret].copy()
     for name in _COLUMNS:
-        true_secrets[name] = true_secrets.apply(ALL_FILTERS[name], axis=1)
+        true_secrets[name] = true_secrets.apply(ALL_FILTERS[name], axis=1).astype(float)
+        # Entropy filters cannot judge a row with no value, so it leaves their
+        # denominator rather than counting as retained.
+        if name.startswith("entropy_"):
+            true_secrets.loc[~true_secrets.has_value, name] = np.nan
     grouped = true_secrets.groupby("category").agg(
         n=("true_secret", "size"),
         **{name: (name, "mean") for name in _COLUMNS},
     )
     grouped = grouped[grouped.n >= _MIN_TRUE_SECRETS].sort_values("n", ascending=False)
+    grouped.index = [f"{cat} (n={n:,})" for cat, n in grouped.n.items()]
     return grouped[list(_COLUMNS)].rename(columns=_COLUMNS)
 
 
